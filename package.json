@@ -1,0 +1,28 @@
+{
+  "name": "mcbot",
+  "version": "1.0.0",
+  "description": "This Minecraft bot is a custom-built tool designed to assist players in various tasks within the game. It is created using the Mineflayer library for interacting with Minecraft servers and offers several features to enhance your gameplay.",
+  "main": "bot.js",
+  "scripts": {
+    "test": "node bot.js localhost nouser"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LUXTACO/RageBot-McBot.git#main"
+  },
+  "keywords": [
+    "mcbot"
+  ],
+  "author": ".takkeshi, LUXTACO",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LUXTACO/RageBot-McBot/issues"
+  },
+  "homepage": "https://github.com/LUXTACO/RageBot-McBot/tree/main#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "mineflayer": "^4.14.0",
+    "mineflayer-pathfinder": "^2.4.5",
+    "mineflayer-pvp": "^1.3.2"
+  }
+}
