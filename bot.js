@@ -114,7 +114,7 @@ function findAndMineBlock(blockType, radius) {
         mining = false;
         });
     } else {
-        bot.chat(`no encontre ${blockType} carnal.`);
+        bot.chat(`${blockType} not found boss.`);
         console.log(`[${getCurrentTime()}] No more ${blockType} found in the area.`.error);
     }
 }
@@ -179,7 +179,7 @@ bot.on('error', err => console.log(`[${getCurrentTime()}] Error: ${err}`.error))
 bot.on('death', () => {
     pos = bot.entity.position;
     console.log(`[${getCurrentTime()}] I died, my coords are ${pos}`.error);
-    bot.chat(`Me mori en ${pos} carnal.`);
+    bot.chat(`I died in ${pos} boss.`);
 });
 
 bot.on('chat', (username, message) => {
@@ -197,7 +197,7 @@ bot.on('chat', (username, message) => {
 
         bot.pathfinder.setMovements(new Movements(bot, player));
         bot.pathfinder.setGoal(new goals.GoalNear(player.position.x, player.position.y, player.position.z, 1));
-        bot.chat(`ok, te voy a seguir carnal.`);
+        bot.chat(`ok, Im going to follow you boss.`);
         console.log(`[${getCurrentTime()}] Following ${owner}`.success);
         following = true;
 
@@ -206,7 +206,7 @@ bot.on('chat', (username, message) => {
 
     else if (username === owner && message === '!stop' && following) { // !stop
         bot.pathfinder.setGoal(null);
-        bot.chat(`ok, ya no te voy a seguir carnal.`);
+        bot.chat(`ok, Im not gonna follow you anymore boss.`);
         console.log(`[${getCurrentTime()}] Stopped following ${owner}`.success);
         following = false;
     }
@@ -214,7 +214,7 @@ bot.on('chat', (username, message) => {
     else if (username === owner && message.startsWith('!runcmd')) { // !runcmd <command>
         command = message.substring(8);
         bot.chat(command);
-        bot.chat(`ok, ejecutando el comando "${command}" carnal.`);
+        bot.chat(`ok, executing command "${command}" boss.`);
         console.log(`[${getCurrentTime()}] Executed command: ${command}`.success);
     }
 
@@ -223,16 +223,16 @@ bot.on('chat', (username, message) => {
         const itemToDrop = bot.inventory.items().find(item => item.name === itemname);
         if (itemToDrop) {
             bot.tossStack(itemToDrop);
-            bot.chat(`ok, tirando el item "${itemname}" carnal.`);
+            bot.chat(`ok, throwing item "${itemname}" boss.`);
             console.log(`[${getCurrentTime()}] Dropped item: ${itemname}`.success);
         } else {
-            bot.chat(`no tengo el item "${itemname}" carnal.`);
+            bot.chat(`I dont have that item "${itemname}" boss.`);
             console.log(`[${getCurrentTime()}] Error: I don't have the item "${itemname}"`.error);
         }
     }
 
     else if (username === owner && message.startsWith('!itemlist')) { // !itemlist
-        bot.chat(`ok, checa la consola para ver mi lista de items carnal.`);
+        bot.chat(`ok, look at the console boss.`);
         console.log(`[${getCurrentTime()}] Item list:`.success);
         bot.inventory.items().forEach(item => {
             console.log(`\t\t\t- ${item.name} x${item.count}`.info);
@@ -242,7 +242,7 @@ bot.on('chat', (username, message) => {
 
     else if (username === owner && message.startsWith('!minefor')){ // !minefor <blockname>
         blockname = message.substring(9);
-        bot.chat(`ok, voy a minar ${blockname} carnal.`);
+        bot.chat(`ok, going to mine ${blockname} boss.`);
         if (!miningInterval) {
             miningInterval = setInterval(() => {
                 findAndMineBlock(blockname, miningradius);
@@ -253,11 +253,11 @@ bot.on('chat', (username, message) => {
     else if (username === owner && message.startsWith('!setminingradius')){ // !setradius <radius>
         miningradius = message.substring(17);
         console.log(`[${getCurrentTime()}] Radius set to ${miningradius}`.success);
-        bot.chat(`ok, el radio de busqueda es de ${miningradius} bloques carnal.`);
+        bot.chat(`ok, the search raduis is ${miningradius} blocks boss.`);
     }
 
     else if (username === owner && message === '!stopmining') {
-        bot.chat(`ok, ya no voy a minar carnal.`);
+        bot.chat(`ok, I stopped mining boss.`);
         bot.pathfinder.setGoal(null);
         mining = false;
         if (bot.isDigging) {
@@ -276,7 +276,7 @@ bot.on('chat', (username, message) => {
 
     else if (username === owner && message === '!defend') { // !defend
         const player = bot.players[owner]?.entity;
-        bot.chat(`ok, voy a defenderme carnal.`);
+        bot.chat(`ok, defending myself boss.`);
 
         function defendfunc(player) {
 
@@ -284,10 +284,10 @@ bot.on('chat', (username, message) => {
             if (sword) {
                 bot.equip(sword, 'hand', (err) => {
                     if (err) {
-                        bot.chat(`no pude equipar la espada carnal.`);
+                        bot.chat(`I was not able to equip the sword boss.`);
                         console.log(`[${getCurrentTime()}] Error: I couldn't equip the sword.`.error);
                     } else {
-                        bot.chat(`ok, ya tengo la espada carnal.`);
+                        bot.chat(`ok, sword equipped boss.`);
                         console.log(`[${getCurrentTime()}] Equipped sword.`.success);
                     }
                 }
@@ -308,12 +308,12 @@ bot.on('chat', (username, message) => {
                 attack_status = true;
             } 
             else if (targetEntity && targetEntity.name == player.name){
-                bot.chat(`no hay entidades cercanas carnal.`);
+                bot.chat(`no entities found boss.`);
                 console.log(`[${getCurrentTime()}] Error: No entities nearby.`.error);
             }
 
             else if (!targetEntity){
-                bot.chat(`no hay entidades cercanas carnal.`);
+                bot.chat(`no entities found boss.`);
                 console.log(`[${getCurrentTime()}] Error: No entities nearby.`.error);
             }
         }
@@ -326,7 +326,7 @@ bot.on('chat', (username, message) => {
     }
 
     else if (username === owner && message === '!stopdefend'){ // !stopdefend
-        bot.chat(`ok, ya no voy a defenderme carnal.`);
+        bot.chat(`ok, stopped defending myself boss.`);
         bot.pvp.stop();
         console.log(`[${getCurrentTime()}] Stopped defending.`.success);
         attack_status = false;
@@ -339,7 +339,7 @@ bot.on('chat', (username, message) => {
     else if (username === owner && message.startsWith('!setdefendradius')){
         entityradius = message.substring(17);
         console.log(`[${getCurrentTime()}] Entity radius set to ${entityradius}`.success);
-        bot.chat(`ok, el radio de busqueda de entidades es de ${entityradius} bloques carnal.`);
+        bot.chat(`ok, the entity search radius is ${entityradius} blocks boss.`);
     }
 
     else if (username === owner && message === '!status' ){ // !status
@@ -353,7 +353,7 @@ bot.on('chat', (username, message) => {
         else {
             armor = "none";
         }
-        bot.chat(`ok, checa la consola para ver mi estado carnal.`);
+        bot.chat(`ok, look at console boss.`);
         console.log(`[${getCurrentTime()}] Status:`.success);
         console.log(`\t\t\t- Health: ${health}`.info);
         console.log(`\t\t\t- Food: ${food}`.info);
@@ -362,7 +362,7 @@ bot.on('chat', (username, message) => {
     }
 
     else if (username === owner && message === '!equiparmor') { // !equiparmor
-        bot.chat(`ok, voy a equipar mi armadura carnal.`);
+        bot.chat(`ok, putting on armor boss.`);
         const helmet = bot.inventory.items().find(item => item.name.includes('helmet'));
         const chestplate = bot.inventory.items().find(item => item.name.includes('chestplate'));
         const leggings = bot.inventory.items().find(item => item.name.includes('leggings'));
@@ -370,10 +370,10 @@ bot.on('chat', (username, message) => {
         if (helmet) {
             bot.equip(helmet, 'head', (err) => {
                 if (err) {
-                    bot.chat(`no pude equipar el casco carnal.`);
+                    bot.chat(`unable to equip armor boss.`);
                     console.log(`[${getCurrentTime()}] Error: I couldn't equip the helmet.`.error);
                 } else {
-                    bot.chat(`ok, ya tengo el casco carnal.`);
+                    bot.chat(`ok, I already have that armor boss.`);
                     console.log(`[${getCurrentTime()}] Equipped helmet.`.success);
                 }
             }
@@ -381,10 +381,10 @@ bot.on('chat', (username, message) => {
         if (chestplate) {
             bot.equip(chestplate, 'torso', (err) => {
                 if (err) {
-                    bot.chat(`no pude equipar el pechera carnal.`);
+                    bot.chat(`unable to equip armor boss.`);
                     console.log(`[${getCurrentTime()}] Error: I couldn't equip the chestplate.`.error);
                 } else {
-                    bot.chat(`ok, ya tengo el pechera carnal.`);
+                    bot.chat(`ok, I already have that armor boss.`);
                     console.log(`[${getCurrentTime()}] Equipped chestplate.`.success);
                 }
             }
@@ -392,10 +392,10 @@ bot.on('chat', (username, message) => {
         if (leggings) {
             bot.equip(leggings, 'legs', (err) => {
                 if (err) {
-                    bot.chat(`no pude equipar el pantalon carnal.`);
+                    bot.chat(`unable to equip armor boss.`);
                     console.log(`[${getCurrentTime()}] Error: I couldn't equip the leggings.`.error);
                 } else {
-                    bot.chat(`ok, ya tengo el pantalon carnal.`);
+                    bot.chat(`ok, I already have that armor boss.`);
                     console.log(`[${getCurrentTime()}] Equipped leggings.`.success);
                 }
             }
@@ -403,10 +403,10 @@ bot.on('chat', (username, message) => {
         if (boots) {
             bot.equip(boots, 'feet', (err) => {
                 if (err) {
-                    bot.chat(`no pude equipar las botas carnal.`);
+                    bot.chat(`unable to equip armor boss.`);
                     console.log(`[${getCurrentTime()}] Error: I couldn't equip the boots.`.error);
                 } else {
-                    bot.chat(`ok, ya tengo las botas carnal.`);
+                    bot.chat(`ok, I already have that armor boss.`);
                     console.log(`[${getCurrentTime()}] Equipped boots.`.success);
                 }
             });
@@ -417,7 +417,7 @@ bot.on('chat', (username, message) => {
         const foodItem = get_best_food_item();
         function eat() {
             if (bot.food === 20) {
-                bot.chat(`ya estoy lleno carnal.`);
+                bot.chat(`Im full boss.`);
                 if (eatInterval) {
                     clearInterval(eatInterval);
                     eatInterval = null;
@@ -428,19 +428,19 @@ bot.on('chat', (username, message) => {
 
             if (foodItem) {
                 bot.equip(foodItem);
-                bot.chat(`ok, comiendo carnal.`);
+                bot.chat(`ok, eating boss.`);
                 console.log(`[${getCurrentTime()}] Eating.`.success);
                 bot.consume(foodItem, (err) => {
                     if (err) {
-                        bot.chat(`no pude comer carnal.`);
+                        bot.chat(`unable to eat boss.`);
                         console.log(`[${getCurrentTime()}] Error: I couldn't eat.`.error);
                     } else {
-                        bot.chat(`ok, ya comi carnal.`);
+                        bot.chat(`ok, finished eating.`);
                     }
                 });
             }
             else {
-                bot.chat(`no tengo comida carnal.`);
+                bot.chat(`I have no food boss.`);
                 console.log(`[${getCurrentTime()}] Error: I don't have food.`.error);
             }
         }
@@ -475,7 +475,7 @@ bot.on('chat', (username, message) => {
         !help - Display this help message.
         `;
     
-        bot.chat('ok, checa la consola carnal.')
+        bot.chat('ok, look at the console boss.')
         console.log(helpMessage.info);
     }
 });
