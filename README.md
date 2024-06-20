@@ -15,6 +15,12 @@
     <br><br>
 </p>
 
+<p align="center" >
+  <b> >>> JOIN THE DISCORD <<< </b>
+    <br>
+  https://discord.gg/PdeTUZ3M62
+</p>
+
 -----
  ### <p align="center">⚒ Commands ⚒<p>
 
