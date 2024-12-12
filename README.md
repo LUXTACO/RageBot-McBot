@@ -8,14 +8,6 @@
 ### <p align="center">☠ Ragebot ☠</p>
 
 <p align="center" >
-    <br>
-    Before you read anything else, If you are looking for the <strong>BEST</strong> account generators check out <a href="https://discord.gg/NNzMbvzEeB">SteamGen</a> for cheap and fully autonomous account generators!
-    <br><br>
-    Ragebot is a powerful tool designed to automate the famous game Minecraft. By using mineflayer. With its simple and efficient interface, users can easily afk farm in minecraft.
-    <br><br>
-</p>
-
-<p align="center" >
   <b> >>> JOIN THE DISCORD <<< </b>
     <br>
   https://discord.gg/PdeTUZ3M62
